@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="match_parent"
-    android:layout_gravity="center_vertical"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="horizontal"
     android:descendantFocusability="blocksDescendants">
 
     <TextView
@@ -13,25 +14,23 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginRight="8dp"
-        android:text="TextView"
+        android:paddingBottom="4dp"
         android:paddingLeft="8dp"
         android:paddingTop="4dp"
-        android:paddingBottom="4dp"
+        android:text="TextView"
         android:textColor="#000000"
-        android:textSize="30sp"
-        />
+        android:textSize="25sp" />
 
     <ImageButton
         android:id="@+id/task_done"
-        android:layout_width="0dp"
-        android:layout_weight="10"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/task_title"
-
-        android:layout_marginTop="8dp"
-        app:srcCompat="@drawable/ic_done_black_24dp"
+        android:layout_marginRight="4dp"
+        android:background="@drawable/style_btn_done"
         android:focusableInTouchMode="true"
-        android:onClick="deleteTask"/>
+        android:onClick="deleteTask"
+        app:srcCompat="@drawable/ic_done_black_24dp" />
 </LinearLayout>

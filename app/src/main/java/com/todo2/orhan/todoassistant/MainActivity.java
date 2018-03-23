@@ -9,10 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,8 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     Button button;
     ListView listView;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), DBconnection.class);
                 intent.putExtra("info","new");
                 startActivity(intent);
-
             }
         });
-
 
     }
 
@@ -49,13 +43,12 @@ public class MainActivity extends AppCompatActivity {
         TextView taskTextView = parent.findViewById(R.id.task_title);
         String s = String.valueOf(taskTextView.getText());
 
-        String sqlString = "DELETE FROM todolist WHERE (name) LIKE (?)";
+        String sqlString = "DELETE FROM todolist WHERE name = (?)";
         DBconnection.sqLiteDatabase = this.openOrCreateDatabase("Todolist", MODE_PRIVATE, null);
         SQLiteStatement statement = DBconnection.sqLiteDatabase.compileStatement(sqlString);
         statement.bindString(1, s);
         statement.execute();
 
-        Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
         onStart();
 
     }
@@ -63,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-
 
         final ArrayList<String> taskList = new ArrayList<>();
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, R.layout.task_item, R.id.task_title, taskList);
@@ -80,13 +71,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         try {
             DBconnection.sqLiteDatabase = this.openOrCreateDatabase("Todolist", MODE_PRIVATE, null);
             DBconnection.sqLiteDatabase.execSQL("CREATE TABLE IF NOT EXISTS todolist (name VARCHAR)");
-
-            // okuma
             Cursor cursor = DBconnection.sqLiteDatabase.rawQuery("SELECT * FROM todolist", null);
 
             int nameIx = cursor.getColumnIndex("name");
@@ -94,17 +81,13 @@ public class MainActivity extends AppCompatActivity {
 
             while(cursor != null) {
                 taskList.add(cursor.getString(nameIx));
-
                 cursor.moveToNext();
                 arrayAdapter.notifyDataSetChanged();
-
             }
-
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
 
     }
 }

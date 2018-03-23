@@ -8,14 +8,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class DBconnection extends AppCompatActivity {
 
     Button button;
     EditText editText;
     static SQLiteDatabase sqLiteDatabase;
-    Boolean b;
+    boolean isExist;
     String s;
 
     @Override
@@ -33,9 +32,9 @@ public class DBconnection extends AppCompatActivity {
         if (info.equalsIgnoreCase("old")) {
             s = intent.getStringExtra("name");
             editText.setText(s);
-            b = true;
+            isExist = true;
         } else
-            b = false;
+            isExist = false;
 
     }
 
@@ -51,8 +50,8 @@ public class DBconnection extends AppCompatActivity {
             statement.execute();
             //sqLiteDatabase.execSQL("DROP TABLE todolist");
 
-            if (b){
-                String sqlString2 = "DELETE FROM todolist WHERE (name) LIKE (?)";
+            if (isExist){
+                String sqlString2 = "DELETE FROM todolist WHERE name = (?)";
                 SQLiteStatement statement2 = sqLiteDatabase.compileStatement(sqlString2);
                 statement2.bindString(1, s);
                 statement2.execute();
@@ -61,7 +60,6 @@ public class DBconnection extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setResult(RESULT_OK);
         finish();
     }
 }

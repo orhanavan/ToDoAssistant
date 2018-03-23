@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.todo2.orhan.todoassistant.MainActivity"
-    tools:layout_editor_absoluteY="81dp">
+    tools:layout_editor_absoluteY="81dp"
+    android:id="@+id/main_layout">
 
 
     <ListView
@@ -20,9 +21,17 @@
 
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/style_btn_add"
+        android:gravity="center"
+        android:drawableLeft="@drawable/ic_pencil_24dp"
+        android:paddingLeft="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/listView"
-        app:layout_constraintEnd_toEndOf="@+id/listView" />
+        app:layout_constraintEnd_toEndOf="@+id/listView"
+        app:layout_constraintRight_toRightOf="parent"
+        />
 </android.support.constraint.ConstraintLayout>
