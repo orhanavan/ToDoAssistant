@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), DBconnection.class);
+                intent.putExtra("info","new");
                 startActivity(intent);
 
             }
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         String sqlString = "DELETE FROM todolist WHERE (name) LIKE (?)";
         DBconnection.sqLiteDatabase = this.openOrCreateDatabase("Todolist", MODE_PRIVATE, null);
         SQLiteStatement statement = DBconnection.sqLiteDatabase.compileStatement(sqlString);
-        statement.bindString(1, "%"+s+"%");
+        statement.bindString(1, s);
         statement.execute();
 
         Toast.makeText(getApplicationContext(),s, Toast.LENGTH_SHORT).show();
@@ -59,20 +60,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-        @Override
+    @Override
     protected void onStart() {
         super.onStart();
 
 
 
-        ArrayList<String> taskList = new ArrayList<>();
+        final ArrayList<String> taskList = new ArrayList<>();
         ArrayAdapter arrayAdapter = new ArrayAdapter<>(this, R.layout.task_item, R.id.task_title, taskList);
         listView.setAdapter(arrayAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),"tıkladın", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), DBconnection.class);
+                intent.putExtra("info", "old");
+                intent.putExtra("name", taskList.get(i));
+                startActivity(intent);
             }
         });
 
