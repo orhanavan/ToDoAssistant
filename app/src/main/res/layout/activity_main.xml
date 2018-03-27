@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context="com.todo2.orhan.todoassistant.MainActivity"
     tools:layout_editor_absoluteY="81dp"
-    android:id="@+id/main_layout">
+    android:id="@+id/main_layout"
+    android:background="#ffcc80">
 
 
     <ListView
